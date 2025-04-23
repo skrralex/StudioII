@@ -2,6 +2,10 @@ function enableRotation(square) {
   let center = { x: 0, y: 0 };
   let initialAngle = 0;
   let currentRotation = 0;
+  let lastClickAngle = 0;
+
+  // Load sound
+  const clickSound = new Audio('click.wav');
 
   square.addEventListener('touchstart', (e) => {
     const rect = square.getBoundingClientRect();
@@ -22,9 +26,13 @@ function enableRotation(square) {
     currentRotation += angleDiff * (180 / Math.PI);
     square.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
 
+    // Play click every 15 degrees of rotation
+    if (Math.abs(currentRotation - lastClickAngle) >= 15) {
+      clickSound.currentTime = 0;
+      clickSound.play();
+      lastClickAngle = currentRotation;
+    }
+
     initialAngle = newAngle;
   });
 }
-
-enableRotation(document.getElementById('square-small'));
-enableRotation(document.getElementById('square-big'));

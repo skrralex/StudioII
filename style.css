@@ -1,0 +1,16 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+  }
+  
+  #square {
+    width: 100px;
+    height: 100px;
+    background-color: tomato;
+    touch-action: none; /* Prevent scrolling on drag */
+    transform: rotate(0deg);
+  }
